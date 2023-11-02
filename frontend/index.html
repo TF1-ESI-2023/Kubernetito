@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    
+    
+    <script>
+        $(document).ready(function(){  
+            
+            $("#btnEnviar").click(function(){
+                var nombre = $("#nombre").val();
+                var precio = $("#precio").val();
+                
+                var data = {
+                    "precio": precio,
+                    "nombre": nombre
+                }
+                jQuery.ajax({  
+                    url: 'http://localhost:30300/api/arroz',  
+                    type: 'POST',
+                    headers: {
+                        "Accept" : "application/json",
+                        "Content-Type" : "application/json",
+                    },
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    
+                    success: function(data) {  
+                       alert("Enviado"); 
+                    },
+                    
+                    error: function(data){
+                        alert("A la mierda");
+                    } 
+                    
+                });  
+            });
+            
+        });  
+        
+        
+        
+    </script>
+</head>
+<body>
+    <h1>Arrocito</h1>
+    
+    <div id="arroz">
+        Nombre: <input type="text" name="nombre" id="nombre" > <br>
+        Precio: <input type="text" name="precio" id="precio" > <br>
+        <button id="btnEnviar">Mandele sr</button>
+    </div>
+    
+    
+</body>
+</html>
